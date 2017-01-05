@@ -2,11 +2,7 @@ const express = require('express');
 
 var app = express();
 
-//GET / shoould serve the index.html file in the public directory
-app.get('/', function (req, res) {
-	res.send('Hello World!');
-});
-
+app.get('/', express.static('public'));
 
 var server = app.listen(3000, () => {
 	var host = server.address().address;
