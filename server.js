@@ -3,13 +3,19 @@ const bodyParser = require('body-parser');
 
 var app = express();
 
+let buzzwordArr = [];
+
 //parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', express.static('public'));
 
-app.get('/buzzword', function (req, res, next) {
-	res.send({ "buzzword": buzzword(Array)});
+app.get('/buzzword', function (req, res) {
+	res.send({ "buzzword": buzzwordArr});
+});
+
+app.post('/buzzword', function (req, res) {
+	
 });
 
 var server = app.listen(3000, () => {
