@@ -3,28 +3,35 @@ const bodyParser = require('body-parser');
 
 var app = express();
 
-let buzzWordsArr = [];
+var buzzWordsArr = [];
 
 //parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', express.static('public'));
 
+//returns JSON response with array of buzz word objects
 app.get('/buzzword', function (req, res) {
 	console.log(buzzWordsArr);
 	res.json({"buzzword": buzzWordsArr});
 });
 
+//creates buzz word objects and pushes it into the buzzWordsArr
 app.post('/buzzword', function (req, res) {
-	let reqBody = req.body;
-	let buzzWordObj = {
-			"buzzWord": reqBody.buzzWord,
-			"points": reqBody.points,
-	};
+	buzzWordsArr.push(req.body);
+	console.log(buzzWordsArr);
+	res.json({ "success": true });
+});
 
-		buzzWordsArr.push(buzzWordObj);
+app.put('/buzzword', function (req, res) {
+for (let i = 0; i<buzzWordsArr.length; i++){
+	if (req.body.buzzWord === buzzWordsArr[i].buzzWord){
+		buzzWordsArr[i].heard = true;
 		console.log(buzzWordsArr);
-		res.json({ "success": true });
+	}
+}
+	console.log(buzzWordsArr);
+	res.send({"success": true, newScore: req.body.points});
 });
 
 var server = app.listen(3000, () => {
