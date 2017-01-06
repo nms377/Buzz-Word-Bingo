@@ -11,15 +11,20 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.get('/', express.static('public'));
 
 app.get('/buzzword', function (req, res) {
-	res.send({ "buzzWord": buzzWordsArr});
+	console.log(buzzWordsArr);
+	res.json({"buzzword": buzzWordsArr});
 });
 
 app.post('/buzzword', function (req, res) {
-	res.json({
-		buzzWord: String,
-		points: Number,
-		heard: false
-	});
+	let reqBody = req.body;
+	let buzzWordObj = {
+			"buzzWord": reqBody.buzzWord,
+			"points": reqBody.points,
+	};
+
+		buzzWordsArr.push(buzzWordObj);
+		console.log(buzzWordsArr);
+		res.json({ "success": true });
 });
 
 var server = app.listen(3000, () => {
