@@ -12,7 +12,7 @@ app.get('/', express.static('public'));
 
 //returns JSON response with array of buzz word objects
 app.get('/buzzword', function (req, res) {
-	console.log(buzzWordsArr);
+	// console.log(buzzWordsArr);
 	res.json({"buzzword": buzzWordsArr});
 });
 
@@ -27,11 +27,11 @@ app.put('/buzzword', function (req, res) {
 for (let i = 0; i<buzzWordsArr.length; i++){
 	if (req.body.buzzWord === buzzWordsArr[i].buzzWord){
 		buzzWordsArr[i].heard = true;
-		console.log(buzzWordsArr);
+		let newScore = parseInt(buzzWordsArr[i].points);
+		console.log(newScore);
+	res.send({"success": true, newScore: newScore});
 	}
 }
-	console.log(buzzWordsArr);
-	res.send({"success": true, newScore: req.body.points});
 });
 
 var server = app.listen(3000, () => {
