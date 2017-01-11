@@ -5,6 +5,8 @@ var app = express();
 
 var buzzWordsArr = [];
 
+let score = 0;
+
 //parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -27,9 +29,9 @@ app.put('/buzzword', function (req, res) {
 for (let i = 0; i<buzzWordsArr.length; i++){
 	if (req.body.buzzWord === buzzWordsArr[i].buzzWord){
 		buzzWordsArr[i].heard = true;
-		let newScore = parseInt(buzzWordsArr[i].points);
-		console.log(newScore);
-	res.send({"success": true, newScore: newScore});
+		score += parseInt(buzzWordsArr[i].points);
+		console.log('Score', score);
+	res.send({"success": true, newScore: score});
 	}
 }
 });
