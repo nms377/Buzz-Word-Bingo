@@ -21,7 +21,6 @@ app.get('/buzzword', function (req, res) {
 //creates buzz word objects and pushes it into the buzzWordsArr
 app.post('/buzzword', function (req, res) {
 	buzzWordsArr.push(req.body);
-	console.log(buzzWordsArr);
 	res.json({ "success": true });
 });
 
@@ -30,7 +29,6 @@ for (let i = 0; i<buzzWordsArr.length; i++){
 	if (req.body.buzzWord === buzzWordsArr[i].buzzWord){
 		buzzWordsArr[i].heard = true;
 		score += parseInt(buzzWordsArr[i].points);
-		console.log('Score', score);
 	res.send({"success": true, newScore: score});
 	}
 }
@@ -40,7 +38,6 @@ app.delete('/buzzword', function (req, res, next) {
 	for (let i=0; i<buzzWordsArr.length; i++){
 		if (req.body.buzzWord === buzzWordsArr[i].buzzWord){
 			buzzWordsArr.splice(i, 1);
-			console.log(buzzWordsArr);
 			res.send({"success": true});
 		}
 	}
@@ -49,7 +46,6 @@ app.delete('/buzzword', function (req, res, next) {
 app.post('/reset', function (req, res) {
 	score = 0;
 	buzzWordsArr = [];
-	console.log('reset', score, buzzWordsArr);
 	res.send({"success": true});
 });
 
