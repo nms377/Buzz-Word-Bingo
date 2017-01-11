@@ -46,6 +46,13 @@ app.delete('/buzzword', function (req, res, next) {
 	}
 });
 
+app.post('/reset', function (req, res) {
+	score = 0;
+	buzzWordsArr = [];
+	console.log('reset', score, buzzWordsArr);
+	res.send({"success": true});
+});
+
 var server = app.listen(3000, () => {
 	var host = server.address().address;
 	var port = server.address().port;
