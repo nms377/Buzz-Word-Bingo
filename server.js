@@ -36,6 +36,16 @@ for (let i = 0; i<buzzWordsArr.length; i++){
 }
 });
 
+app.delete('/buzzword', function (req, res, next) {
+	for (let i=0; i<buzzWordsArr.length; i++){
+		if (req.body.buzzWord === buzzWordsArr[i].buzzWord){
+			buzzWordsArr.splice(i, 1);
+			console.log(buzzWordsArr);
+			res.send({"success": true});
+		}
+	}
+});
+
 var server = app.listen(3000, () => {
 	var host = server.address().address;
 	var port = server.address().port;
