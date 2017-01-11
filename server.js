@@ -2,9 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 var app = express();
-
 var buzzWordsArr = [];
-
 let score = 0;
 
 //parse application/x-www-form-urlencoded
@@ -14,7 +12,6 @@ app.get('/', express.static('public'));
 
 //returns JSON response with array of buzz word objects
 app.get('/buzzword', function (req, res) {
-	// console.log(buzzWordsArr);
 	res.json({"buzzword": buzzWordsArr});
 });
 
@@ -25,13 +22,13 @@ app.post('/buzzword', function (req, res) {
 });
 
 app.put('/buzzword', function (req, res) {
-for (let i = 0; i<buzzWordsArr.length; i++){
-	if (req.body.buzzWord === buzzWordsArr[i].buzzWord){
-		buzzWordsArr[i].heard = true;
-		score += parseInt(buzzWordsArr[i].points);
-	res.send({"success": true, newScore: score});
+	for (let i = 0; i<buzzWordsArr.length; i++){
+		if (req.body.buzzWord === buzzWordsArr[i].buzzWord){
+			buzzWordsArr[i].heard = true;
+			score += parseInt(buzzWordsArr[i].points);
+		res.send({"success": true, newScore: score});
+		}
 	}
-}
 });
 
 app.delete('/buzzword', function (req, res, next) {
